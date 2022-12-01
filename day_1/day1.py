@@ -39,22 +39,8 @@ def part2():
         if single_inventory:
             cals.append(sum(single_inventory))
     
-    #First Highest value: 
-    max_cals = []
-    max_cals.append((max(cals)))
-    cals.remove(max(cals))
-
-    #output: 43
-
-    # Second Highest value:
-    max_cals.append((max(cals)))
-    cals.remove(max(cals))
-
-    #output: 9
-        
-            
-    # Third Highest Value:
-    max_cals.append((max(cals)))
+    cals.sort()
+    max_cals = cals[-3:]
 
     return sum(max_cals)
 
