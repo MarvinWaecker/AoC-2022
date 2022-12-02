@@ -1,4 +1,5 @@
 import os
+import pandas as pd
 
 # A = rock
 # B = paper
@@ -8,47 +9,17 @@ import os
 # X = rock
 # Z = scissors
 
+#    A  B  C
+# X  4  1  7
+# Y  8  5  2
+# Z  3  9  6
+
+
 def part1():
-    # paths
-    here = os.path.dirname(os.path.abspath(__file__))
-    filename = os.path.join(here, 'data.txt')
-
-    player1 = []
-    player2 = []
-
-    # load data
+    filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data.txt')
+    m = pd.DataFrame([[4,1,7],[8,5,2],[3,9,6]], index=['X','Y','Z'], columns=['A','B','C'])
     with open(filename, 'r') as file:
-        single_inventory = []
-        for x in file.read().splitlines():
-            if x[0] == 'A':
-                x1 = 1
-            elif x[0] == 'B':
-                x1 = 2
-            elif x[0] == 'C':
-                x1 = 3
-            if x[2] == 'X':
-                x2 = 1
-            elif x[2] == 'Y':
-                x2 = 2
-            elif x[2] == 'Z':
-                x2 = 3
-
-            if x1 == x2:
-                player2.append(x2 + 3)
-            elif x1 == 1 and x2 == 3:
-                player2.append(x2)
-            elif x1 == 1 and x2 == 2:
-                player2.append(x2 + 6)
-            elif x1 == 2 and x2 == 1:
-                player2.append(x2)
-            elif x1 == 2 and x2 == 3:
-                player2.append(x2 + 6)
-            elif x1 == 3 and x2 == 1:
-                player2.append(x2 + 6)
-            elif x1 == 3 and x2 == 2:
-                player2.append(x2)
-
-    return sum(player2)
+        return sum([m[x[0]][x[2]] for x in file.read().splitlines()])
 
 
 def part2():
@@ -56,12 +27,10 @@ def part2():
     here = os.path.dirname(os.path.abspath(__file__))
     filename = os.path.join(here, 'data.txt')
 
-    player1 = []
     player2 = []
 
     # load data
     with open(filename, 'r') as file:
-        single_inventory = []
         for x in file.read().splitlines():
             if x[0] == 'A':
                 x1 = 'rock' # 3
